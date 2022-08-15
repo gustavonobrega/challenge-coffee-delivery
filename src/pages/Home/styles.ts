@@ -40,37 +40,15 @@ export const Intro = styled.div`
       li {
         display: flex;
         align-items: center;
+
+        > span {
+          margin-right: 0.75rem;
+        }
       }
     }
   }
 `
 
-const ITEMS_COLORS = {
-  shopping: 'yellow-dark',
-  package: 'base-text',
-  timer: 'yellow',
-  coffee: 'purple',
-} as const
-
-interface ItemsProps {
-  itemColor: keyof typeof ITEMS_COLORS
-}
-
-export const Items = styled.span<ItemsProps>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  height: 2rem;
-  width: 2rem;
-  margin-right: 0.75rem;
-  border-radius: 50%;
-  background: ${(props) => props.theme[ITEMS_COLORS[props.itemColor]]};
-
-  svg {
-    color: ${(props) => props.theme.white};
-  }
-`
 export const CoffeeList = styled.main`
   margin: 2rem 0 9.813rem;
 

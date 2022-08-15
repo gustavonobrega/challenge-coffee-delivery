@@ -1,14 +1,9 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import coffee from '../../assets/coffee-delivery.png'
 
-import {
-  HomeContainer,
-  Intro,
-  Items,
-  CoffeeList,
-  CoffeesContainer,
-} from './styles'
+import { HomeContainer, Intro, CoffeeList, CoffeesContainer } from './styles'
 import { CoffeeCard } from './components/CoffeeCard'
+import { CustomIcon } from '../../components/CustomIcon'
 
 export function Home() {
   return (
@@ -23,27 +18,27 @@ export function Home() {
 
           <ul>
             <li>
-              <Items itemColor="shopping">
+              <CustomIcon iconBg="shopping">
                 <ShoppingCart weight="fill" />
-              </Items>
+              </CustomIcon>
               Compra simples e segura
             </li>
             <li>
-              <Items itemColor="package">
+              <CustomIcon iconBg="package">
                 <Package weight="fill" />
-              </Items>
+              </CustomIcon>
               Embalagem mantém o café intacto
             </li>
             <li>
-              <Items itemColor="timer">
+              <CustomIcon iconBg="timer">
                 <Timer weight="fill" />
-              </Items>
+              </CustomIcon>
               Entrega rápida e rastreada
             </li>
             <li>
-              <Items itemColor="coffee">
+              <CustomIcon iconBg="coffee">
                 <Coffee weight="fill" />
-              </Items>
+              </CustomIcon>
               O café chega fresquinho até você
             </li>
           </ul>
