@@ -1,5 +1,6 @@
 import { ShoppingCart } from 'phosphor-react'
 import { QuantityInput } from '../../../../components/QuantityInput'
+import { formatPrice } from '../../../../utils/formatPrice'
 import { CoffeeCardContainer, CoffeeCardFooter } from './styles'
 
 interface CoffeeCardProps {
@@ -19,6 +20,8 @@ export function CoffeeCard({
   description,
   price,
 }: CoffeeCardProps) {
+  const formattedPrice = formatPrice(price)
+
   return (
     <CoffeeCardContainer>
       <img src={imgUrl} alt="" />
@@ -36,7 +39,7 @@ export function CoffeeCard({
       <CoffeeCardFooter>
         <div>
           <span>R$</span>
-          <strong>{price}</strong>
+          <strong>{formattedPrice}</strong>
         </div>
 
         <QuantityInput />
