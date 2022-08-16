@@ -4,6 +4,7 @@ import coffee from '../../assets/coffee-delivery.png'
 import { HomeContainer, Intro, CoffeeList, CoffeesContainer } from './styles'
 import { CoffeeCard } from './components/CoffeeCard'
 import { CustomIcon } from '../../components/CustomIcon'
+import { coffees } from '../../data/coffees'
 
 export function Home() {
   return (
@@ -51,22 +52,17 @@ export function Home() {
         <h2>Nossos cafés</h2>
 
         <CoffeesContainer>
-          <CoffeeCard
-            id={1}
-            imgUrl="src/assets/coffees/expresso-tradicional.png"
-            tags={['Tradicional']}
-            name="Expresso Tradicional"
-            description="O tradicional café feito com água quente e grãos moídos"
-            price={9.9}
-          />
-          <CoffeeCard
-            id={2}
-            imgUrl="src/assets/coffees/expresso-tradicional.png"
-            tags={['Tradicional', 'Gelado']}
-            name="Expresso Gelado"
-            description="Bebida preparada com café expresso e cubos de gelo"
-            price={9.9}
-          />
+          {coffees.map((coffee) => (
+            <CoffeeCard
+              key={coffee.id}
+              id={coffee.id}
+              imgUrl={`src/assets/coffees/${coffee.photo}`}
+              tags={coffee.tags}
+              name={coffee.name}
+              description={coffee.description}
+              price={coffee.price}
+            />
+          ))}
         </CoffeesContainer>
       </CoffeeList>
     </HomeContainer>

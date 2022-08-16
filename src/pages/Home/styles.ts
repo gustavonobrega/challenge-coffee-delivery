@@ -59,9 +59,11 @@ export const CoffeeList = styled.main`
     color: ${(props) => props.theme['base-subtitle']};
   }
 `
+
 export const CoffeesContainer = styled.div`
   margin-top: 3.375rem;
 
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
 `
