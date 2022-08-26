@@ -28,8 +28,12 @@ export const QuantityInputContainer = styled.div`
     background: ${(props) => props.theme['base-button']};
     cursor: pointer;
 
-    &:hover {
+    &:not(:disabled):hover {
       color: ${(props) => props.theme['purple-dark']};
+    }
+
+    &:disabled {
+      cursor: default;
     }
   }
 
