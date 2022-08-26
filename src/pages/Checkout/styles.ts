@@ -55,3 +55,21 @@ export const SelectedCoffees = styled.div`
     margin-bottom: 0.938rem;
   }
 `
+
+export const OrderCard = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  padding: 2.5rem;
+  background: ${(props) => props.theme['base-card']};
+  border-radius: 6px 44px 6px 44px;
+`
+
+export const EmptyCard = styled.p`
+  padding-bottom: 2.094rem;
+  margin-bottom: 2.094rem;
+  border-bottom: 1px solid ${(props) => props.theme['base-button']};
+  font-size: 1.1rem;
+  text-align: center;
+`
