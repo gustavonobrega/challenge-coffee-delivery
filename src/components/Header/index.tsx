@@ -1,22 +1,33 @@
-import { HeaderContainer } from './styles'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
 import logoCoffeeDelivery from '../../assets/logo-coffee-delivery.svg'
+import { HeaderContainer, StyledNavLink } from './styles'
+import { CartContext } from '../../contexts/CartContext'
+import { useContext } from 'react'
 
 export function Header() {
+  const { cart } = useContext(CartContext)
+
+  const totalCartItens = cart.reduce((acc, item) => {
+    return (acc += item.amount)
+  }, 0)
+
   return (
     <HeaderContainer>
-      <img src={logoCoffeeDelivery} alt="" />
+      <Link to="/" title="Home">
+        <img src={logoCoffeeDelivery} alt="" />
+      </Link>
 
       <nav>
-        <NavLink to="/" title="Home">
+        <span>
           <MapPin size={24} weight="fill" />
           Porto Alegre, RS
-        </NavLink>
-        <NavLink to="/checkout" title="Checkout">
+        </span>
+        <StyledNavLink to="/checkout" title="Checkout">
+          {cart.length >= 1 && <span>{totalCartItens}</span>}
           <ShoppingCart size={24} weight="fill" />
-        </NavLink>
+        </StyledNavLink>
       </nav>
     </HeaderContainer>
   )
