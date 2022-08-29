@@ -48,7 +48,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         }
 
         setCart([...cart, newCart])
-        toast.success('Café adicionado no carrinho com sucesso!')
+        toast.success('Café adicionado no carrinho com sucesso!', {
+          position: 'bottom-right',
+        })
       }
     } else {
       const updatedCart = cart.map((coffee) =>
