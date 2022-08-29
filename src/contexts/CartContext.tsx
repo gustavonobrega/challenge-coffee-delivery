@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { coffees } from '../data/coffees'
 
@@ -47,6 +48,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         }
 
         setCart([...cart, newCart])
+        toast.success('Café adicionado no carrinho com sucesso!')
       }
     } else {
       const updatedCart = cart.map((coffee) =>
