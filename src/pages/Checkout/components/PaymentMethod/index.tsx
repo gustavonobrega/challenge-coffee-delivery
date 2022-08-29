@@ -1,10 +1,22 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
-import { useState } from 'react'
-import { PaymentMethodContainer, PaymentTypeButton } from './styles'
+import { PaymentMethodContainer, PaymentType } from './styles'
+
+export const paymentMethods = {
+  credit: {
+    label: 'Cartão de crédito',
+    icon: <CreditCard size={16} />,
+  },
+  debit: {
+    label: 'Cartão de débito',
+    icon: <Bank size={16} />,
+  },
+  money: {
+    label: 'Dinheiro',
+    icon: <Money size={16} />,
+  },
+}
 
 export function PaymentMethod() {
-  const [isSelected, setIsSelected] = useState(true)
-
   return (
     <PaymentMethodContainer>
       <h4>
@@ -15,22 +27,17 @@ export function PaymentMethod() {
       <p>O pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
 
       <div>
-        <PaymentTypeButton
-          type="button"
-          isSelected={isSelected}
-          disabled={isSelected}
-        >
-          <CreditCard size={16} />
-          Cartão de crédito
-        </PaymentTypeButton>
-        <PaymentTypeButton type="button">
-          <Bank size={16} />
-          Cartão de débito
-        </PaymentTypeButton>
-        <PaymentTypeButton type="button">
-          <Money size={16} />
-          Dinheiro
-        </PaymentTypeButton>
+        {Object.entries(paymentMethods).map(([key, { label, icon }]) => (
+          <PaymentType key={key}>
+            <input type="radio" id={key} value={label} name="paymentMethod" />
+            <label htmlFor={key}>
+              <div>
+                {icon}
+                {label}
+              </div>
+            </label>
+          </PaymentType>
+        ))}
       </div>
     </PaymentMethodContainer>
   )

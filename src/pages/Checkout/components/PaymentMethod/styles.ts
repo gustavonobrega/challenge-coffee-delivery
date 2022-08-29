@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { BaseCompleteOrderCard } from '../../styles'
 
 export const PaymentMethodContainer = styled(BaseCompleteOrderCard)`
@@ -10,51 +10,52 @@ export const PaymentMethodContainer = styled(BaseCompleteOrderCard)`
     }
   }
 
-  div {
-    margin-top: 2rem;
+  > div {
+    margin-top: 1rem;
 
     display: flex;
     gap: 0.75rem;
   }
 `
-interface PaymentTypeButtonProps {
-  isSelected?: boolean
-}
 
-export const PaymentTypeButton = styled.button<PaymentTypeButtonProps>`
+export const PaymentType = styled.div`
   flex: 1;
-  display: flex;
-  align-items: center;
 
-  gap: 0.75rem;
+  input {
+    visibility: hidden;
+    appearance: none;
 
-  padding: 1rem;
-  border: none;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  border-radius: 6px;
-  color: ${(props) => props.theme['base-text']};
-  background: ${(props) => props.theme['base-button']};
-  cursor: pointer;
-  transition: 0.2s;
-
-  svg {
-    color: ${(props) => props.theme.purple};
-  }
-
-  &:not(:disabled):hover {
-    color: ${(props) => props.theme['base-subtitle']};
-    background: ${(props) => props.theme['base-hover']};
-  }
-
-  ${(props) =>
-    props.isSelected &&
-    css`
+    &:checked + label div {
       background: ${(props) => props.theme['purple-light']};
       border: 1px solid ${(props) => props.theme.purple};
 
-      &:disabled {
-        cursor: default;
-      }
-    `}
+      cursor: default;
+    }
+  }
+
+  label div {
+    display: flex;
+    align-items: center;
+
+    gap: 0.75rem;
+
+    padding: 1rem;
+    border: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    border-radius: 6px;
+    color: ${(props) => props.theme['base-text']};
+    background: ${(props) => props.theme['base-button']};
+    cursor: pointer;
+    transition: 0.2s;
+
+    svg {
+      color: ${(props) => props.theme.purple};
+    }
+
+    &:hover {
+      color: ${(props) => props.theme['base-subtitle']};
+      background: ${(props) => props.theme['base-hover']};
+    }
+  }
 `
