@@ -1,10 +1,18 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useLocation } from 'react-router-dom'
 import confirmedOrder from '../../assets/confirmed-order.png'
 import { CustomIcon } from '../../components/CustomIcon'
+import { NewOrderFormData } from '../Checkout'
 
 import { SuccessContainer, ConfirmedOrder, OrderInfos } from './styles'
 
+interface LocationProps {
+  state: NewOrderFormData
+}
+
 export function Success() {
+  const { state } = useLocation() as LocationProps
+
   return (
     <SuccessContainer>
       <ConfirmedOrder>
@@ -18,8 +26,12 @@ export function Success() {
             </CustomIcon>
 
             <p>
-              Entrega em <b>Rua João Daniel Martinelli, 102</b> <br />
-              Farrapos - Porto Alegre, RS
+              Entrega em{' '}
+              <b>
+                {state.rua}, {state.numero}
+              </b>
+              <br />
+              {state.bairro} - {state.cidade}, {state.uf}
             </p>
           </OrderInfos>
           <OrderInfos>
@@ -39,7 +51,7 @@ export function Success() {
 
             <p>
               Pagamento na entrega <br />
-              <b>Cartão de Crédito</b>
+              <b>{state.paymentMethod}</b>
             </p>
           </OrderInfos>
         </div>
