@@ -1,7 +1,10 @@
 import { MapPinLine } from 'phosphor-react'
-import { DeliveryAddressContainer, FormInput } from './styles'
+import { useFormContext } from 'react-hook-form'
+import { DeliveryAddressContainer, Input } from './styles'
 
 export function DeliveryAddress() {
+  const { register, formState } = useFormContext()
+
   return (
     <DeliveryAddressContainer>
       <h4>
@@ -11,21 +14,55 @@ export function DeliveryAddress() {
 
       <p>Informe o endereço onde deseja receber seu pedido</p>
 
-      <form action="">
-        <FormInput type="text" placeholder="CEP" />
-        <FormInput type="text" placeholder="Rua" />
+      <div>
+        <Input
+          type="text"
+          placeholder="CEP"
+          {...register('cep')}
+          hasError={!!formState.errors.cep?.message}
+        />
+        <Input
+          type="text"
+          placeholder="Rua"
+          {...register('rua')}
+          hasError={!!formState.errors.rua?.message}
+        />
 
         <div>
-          <FormInput type="text" placeholder="Número" />
-          <FormInput type="text" placeholder="Complemento" />
+          <Input
+            type="text"
+            placeholder="Número"
+            {...register('numero')}
+            hasError={!!formState.errors.numero?.message}
+          />
+          <Input
+            type="text"
+            placeholder="Complemento"
+            {...register('complemento')}
+          />
         </div>
 
         <div>
-          <FormInput type="text" placeholder="Bairro" />
-          <FormInput type="text" placeholder="Cidade" />
-          <FormInput type="text" placeholder="UF" />
+          <Input
+            type="text"
+            placeholder="Bairro"
+            {...register('bairro')}
+            hasError={!!formState.errors.bairro?.message}
+          />
+          <Input
+            type="text"
+            placeholder="Cidade"
+            {...register('cidade')}
+            hasError={!!formState.errors.cidade?.message}
+          />
+          <Input
+            type="text"
+            placeholder="UF"
+            {...register('uf')}
+            hasError={!!formState.errors.uf?.message}
+          />
         </div>
-      </form>
+      </div>
     </DeliveryAddressContainer>
   )
 }

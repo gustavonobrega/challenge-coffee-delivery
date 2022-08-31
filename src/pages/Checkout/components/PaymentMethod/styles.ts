@@ -11,10 +11,15 @@ export const PaymentMethodContainer = styled(BaseCompleteOrderCard)`
   }
 
   > div {
-    margin-top: 1rem;
+    margin: 1rem 0;
 
     display: flex;
     gap: 0.75rem;
+  }
+
+  > span {
+    font-size: 0.9rem;
+    color: red;
   }
 `
 

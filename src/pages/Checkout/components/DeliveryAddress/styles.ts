@@ -1,5 +1,9 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { BaseCompleteOrderCard } from '../../styles'
+
+interface InputProps {
+  hasError?: boolean
+}
 
 export const DeliveryAddressContainer = styled(BaseCompleteOrderCard)`
   h4 {
@@ -8,7 +12,7 @@ export const DeliveryAddressContainer = styled(BaseCompleteOrderCard)`
     }
   }
 
-  form {
+  > div {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -30,7 +34,7 @@ export const DeliveryAddressContainer = styled(BaseCompleteOrderCard)`
   }
 `
 
-export const FormInput = styled.input`
+export const Input = styled.input<InputProps>`
   padding: 0.75rem;
   font-size: 0.875rem;
   border-radius: 4px;
@@ -47,4 +51,10 @@ export const FormInput = styled.input`
   &:focus {
     border: 1px solid ${(props) => props.theme['yellow-dark']};
   }
+
+  ${(props) =>
+    props.hasError &&
+    css`
+      border: 1px solid red;
+    `}
 `

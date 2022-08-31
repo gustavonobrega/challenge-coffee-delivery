@@ -1,4 +1,5 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
+import { useFormContext } from 'react-hook-form'
 import { PaymentMethodContainer, PaymentType } from './styles'
 
 export const paymentMethods = {
@@ -17,6 +18,8 @@ export const paymentMethods = {
 }
 
 export function PaymentMethod() {
+  const { register, formState } = useFormContext()
+
   return (
     <PaymentMethodContainer>
       <h4>
@@ -29,7 +32,12 @@ export function PaymentMethod() {
       <div>
         {Object.entries(paymentMethods).map(([key, { label, icon }]) => (
           <PaymentType key={key}>
-            <input type="radio" id={key} value={label} name="paymentMethod" />
+            <input
+              type="radio"
+              id={key}
+              value={label}
+              {...register('paymentMethod')}
+            />
             <label htmlFor={key}>
               <div>
                 {icon}
@@ -39,6 +47,9 @@ export function PaymentMethod() {
           </PaymentType>
         ))}
       </div>
+      {formState.errors.paymentMethod?.message && (
+        <span>Selecione o método de pagamento</span>
+      )}
     </PaymentMethodContainer>
   )
 }
