@@ -4,15 +4,22 @@ export const HomeContainer = styled.div`
   flex: 1;
 `
 export const Intro = styled.div`
+  width: 100%;
   height: 34rem;
   display: flex;
   align-items: center;
   gap: 3.5rem;
 
-  width: 100%;
   background-image: url(/src/assets/blur-background.png);
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
+`
+export const IntroContent = styled.div`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
 
   div {
     h1 {
@@ -50,7 +57,9 @@ export const Intro = styled.div`
 `
 
 export const CoffeeList = styled.main`
-  margin: 2rem 0 9.813rem;
+  > div {
+    margin: 2rem 0 9.813rem;
+  }
 
   h2 {
     font-family: 'Baloo 2', sans-serif;

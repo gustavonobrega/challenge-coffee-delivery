@@ -50,34 +50,36 @@ export function Checkout() {
   }
 
   return (
-    <CheckoutContainer>
-      <form onSubmit={handleSubmit(handleCreateNewOrder)} action="">
-        <CompleteOrder>
-          <h3>Complete seu pedido</h3>
+    <div className="container">
+      <CheckoutContainer>
+        <form onSubmit={handleSubmit(handleCreateNewOrder)} action="">
+          <CompleteOrder>
+            <h3>Complete seu pedido</h3>
 
-          <FormProvider {...newOrderForm}>
-            <DeliveryAddress />
+            <FormProvider {...newOrderForm}>
+              <DeliveryAddress />
 
-            <PaymentMethod />
-          </FormProvider>
-        </CompleteOrder>
+              <PaymentMethod />
+            </FormProvider>
+          </CompleteOrder>
 
-        <SelectedCoffees>
-          <h3>Cafés selecionados</h3>
+          <SelectedCoffees>
+            <h3>Cafés selecionados</h3>
 
-          <OrderCard>
-            {cart.length > 0 ? (
-              cart.map((coffee) => (
-                <CoffeeCardCart key={coffee.id} coffee={coffee} />
-              ))
-            ) : (
-              <EmptyCard>Você não possui nenhum item no carrinho!</EmptyCard>
-            )}
+            <OrderCard>
+              {cart.length > 0 ? (
+                cart.map((coffee) => (
+                  <CoffeeCardCart key={coffee.id} coffee={coffee} />
+                ))
+              ) : (
+                <EmptyCard>Você não possui nenhum item no carrinho!</EmptyCard>
+              )}
 
-            <OrderConfirmation />
-          </OrderCard>
-        </SelectedCoffees>
-      </form>
-    </CheckoutContainer>
+              <OrderConfirmation />
+            </OrderCard>
+          </SelectedCoffees>
+        </form>
+      </CheckoutContainer>
+    </div>
   )
 }
