@@ -39,7 +39,21 @@ interface CartContextData {
 export const CartContext = createContext({} as CartContextData)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cart, dispatch] = useReducer(cartReducer, [])
+  const [cart, dispatch] = useReducer(cartReducer, [], () => {
+    const storedCart = localStorage.getItem('@coffee-delivery:cart-1.0.0')
+
+    if (storedCart) {
+      return JSON.parse(storedCart)
+    }
+
+    return []
+  })
+
+  useEffect(() => {
+    const cartJSON = JSON.stringify(cart)
+
+    localStorage.setItem('@coffee-delivery:cart-1.0.0', cartJSON)
+  }, [cart])
 
   function addToCart(coffeeId: number, quantity: number) {
     const cartCoffee = cart.find((coffee) => coffee.id === coffeeId)
