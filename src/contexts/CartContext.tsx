@@ -1,7 +1,15 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify'
 
 import { coffees } from '../data/coffees'
+import {
+  addCoffeeAmountAction,
+  addNewCoffeeAction,
+  removeCoffeeAction,
+  resetCartAction,
+  updateCoffeeAmountAction,
+} from '../reducers/cart/actions'
+import { cartReducer } from '../reducers/cart/reducer'
 
 interface CartContextProviderProps {
   children: ReactNode
@@ -25,12 +33,13 @@ interface CartContextData {
   addToCart: (coffeeId: number, quantity: number) => void
   updateCoffeeCart: ({ coffeeId, coffeeAmount }: UpdateCoffeeCart) => void
   removeCoffeeCart: (coffeeId: number) => void
+  cleanCart: () => void
 }
 
 export const CartContext = createContext({} as CartContextData)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cart, setCart] = useState<CartCoffee[]>([])
+  const [cart, dispatch] = useReducer(cartReducer, [])
 
   function addToCart(coffeeId: number, quantity: number) {
     const cartCoffee = cart.find((coffee) => coffee.id === coffeeId)
@@ -47,55 +56,32 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
           amount: quantity,
         }
 
-        setCart([...cart, newCart])
+        dispatch(addNewCoffeeAction(newCart))
+
         toast.success('Café adicionado no carrinho com sucesso!', {
           position: 'bottom-right',
         })
       }
     } else {
-      const updatedCart = cart.map((coffee) =>
-        coffee.id === coffeeId
-          ? {
-              ...coffee,
-              amount: coffee?.amount + quantity,
-            }
-          : coffee,
-      )
-
-      setCart(updatedCart)
+      dispatch(addCoffeeAmountAction(coffeeId, quantity))
     }
   }
 
   function updateCoffeeCart({ coffeeId, coffeeAmount }: UpdateCoffeeCart) {
-    const cartCoffee = cart.find((coffee) => coffee.id === coffeeId)
-
-    if (cartCoffee) {
-      const newCart = cart.map((coffee) =>
-        coffee.id === coffeeId
-          ? {
-              ...coffee,
-              amount: coffeeAmount,
-            }
-          : coffee,
-      )
-
-      setCart(newCart)
-    }
+    dispatch(updateCoffeeAmountAction(coffeeId, coffeeAmount))
   }
 
   function removeCoffeeCart(coffeeId: number) {
-    const cartCoffee = cart.find((coffee) => coffee.id === coffeeId)
+    dispatch(removeCoffeeAction(coffeeId))
+  }
 
-    if (cartCoffee) {
-      const newCart = cart.filter((coffee) => coffee.id !== coffeeId)
-
-      setCart(newCart)
-    }
+  function cleanCart() {
+    dispatch(resetCartAction())
   }
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeCoffeeCart, updateCoffeeCart }}
+      value={{ cart, addToCart, removeCoffeeCart, updateCoffeeCart, cleanCart }}
     >
       {children}
     </CartContext.Provider>

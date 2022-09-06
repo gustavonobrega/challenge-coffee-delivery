@@ -31,7 +31,7 @@ const newOrderFormValidationSchema = zod.object({
 export type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>
 
 export function Checkout() {
-  const { cart } = useContext(CartContext)
+  const { cart, cleanCart } = useContext(CartContext)
 
   const newOrderForm = useForm<NewOrderFormData>({
     resolver: zodResolver(newOrderFormValidationSchema),
@@ -45,6 +45,8 @@ export function Checkout() {
     navigate('/success', {
       state: data,
     })
+
+    cleanCart()
   }
 
   return (
