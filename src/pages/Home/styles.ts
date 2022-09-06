@@ -8,7 +8,6 @@ export const Intro = styled.div`
   height: 34rem;
   display: flex;
   align-items: center;
-  gap: 3.5rem;
 
   background-image: url(/src/assets/blur-background.png);
   background-repeat: no-repeat;
@@ -20,6 +19,7 @@ export const IntroContent = styled.div`
 
   display: flex;
   align-items: center;
+  gap: 3.5rem;
 
   div {
     h1 {
